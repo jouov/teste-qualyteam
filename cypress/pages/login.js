@@ -1,4 +1,4 @@
-const loginPage = {
+export const loginPage = {
     url: 'the-internet.herokuapp.com/login',
     usernameInput: '#username',
     passwordInput: '#password',
@@ -6,5 +6,3 @@ const loginPage = {
     loginErrorAlert: '#flash',
     closeLoginErrorAlert: '.close',
 };
-
-export { loginPage };

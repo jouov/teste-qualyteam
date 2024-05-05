@@ -1,4 +1,4 @@
-import { fileUploader } from "../pages/fileUploader";
+import { fileUploaderPage } from "../pages/fileUploader";
 
 const filesNames = [
     'example.json',
@@ -7,12 +7,12 @@ const filesNames = [
 ];
 
 const uploadFileToDragAndDropAndCheckContainer = (filesNames) => {
-    cy.visit(fileUploader.url);
+    cy.visit(fileUploaderPage.url);
     
     filesNames.forEach((file) => {
         cy.dragAndDropFile({
             file: file,
-            input: fileUploader.dragAndDropFileInput
+            input: fileUploaderPage.dragAndDropFileInput
         });
         cy.wait('@postFile').its('response').then((requestResponse) => {
             expect(requestResponse.statusCode).eq(200);
@@ -23,20 +23,20 @@ const uploadFileToDragAndDropAndCheckContainer = (filesNames) => {
 
 describe('File Upload Tests', () => {
     beforeEach(() => {
-        cy.intercept(fileUploader.intercept.postFile).as('postFile');
+        cy.intercept(fileUploaderPage.intercept.postFile).as('postFile');
     });
     
     it('"Choose File" Button Upload Test', () => {
         const successMessage = 'File Uploaded!';
 
-        cy.visit(fileUploader.url);
+        cy.visit(fileUploaderPage.url);
         cy.uploadFile({
             file: filesNames[0],
-            input: fileUploader.chooseFileInput,
+            input: fileUploaderPage.chooseFileInput,
         });
-        cy.get(fileUploader.submitFileButton).click();
-        cy.get(fileUploader.successMessage).should('be.visible').should('contain', successMessage);
-        cy.get(fileUploader.uploadedFilesContainer).should('be.visible').should('contain', filesNames[0]);
+        cy.get(fileUploaderPage.submitFileButton).click();
+        cy.get(fileUploaderPage.successMessage).should('be.visible').should('contain', successMessage);
+        cy.get(fileUploaderPage.uploadedFilesContainer).should('be.visible').should('contain', filesNames[0]);
     });
 
     it('"Drag And Drop" Area Upload Test', () => {

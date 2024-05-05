@@ -1,4 +1,4 @@
-const fileUploader = {
+export const fileUploaderPage = {
     url: 'https://the-internet.herokuapp.com/upload',
     intercept: {
         postFile: ({
@@ -13,5 +13,3 @@ const fileUploader = {
     dragAndDropFileInput: '#drag-drop-upload',
     dragAndDropUploadedFilesContainer: '.dz-filename', 
 };
-
-export { fileUploader };

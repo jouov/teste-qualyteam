@@ -1,5 +1,5 @@
 import { loginPage } from "../pages/login"
-import { secureArea } from "../pages/secureArea";
+import { secureAreaPage } from "../pages/secureArea";
 
 const userInfo = {
     incorrectUsername: 'abc',
@@ -30,9 +30,9 @@ describe('Practice Test', () => {
         cy.get(loginPage.usernameInput).type(userInfo.correctUsername);
         cy.get(loginPage.passwordInput).type(userInfo.correctPassword);
         cy.get(loginPage.loginButton).click();
-        cy.get(secureArea.successMessage).should('be.visible').should('contain', 'You logged into a secure area!');
-        cy.get(secureArea.logoutButton).click();
-        cy.get(secureArea.successMessage).should('be.visible').should('contain', 'You logged out of the secure area!');
+        cy.get(secureAreaPage.successMessage).should('be.visible').should('contain', 'You logged into a secure area!');
+        cy.get(secureAreaPage.logoutButton).click();
+        cy.get(secureAreaPage.successMessage).should('be.visible').should('contain', 'You logged out of the secure area!');
     });
 
     it('Incorrect Username Test', () => {
@@ -52,7 +52,7 @@ describe('Practice Test', () => {
     });
 
     it('Visit Logged Area URL Before Logging In Test', () => {
-        cy.visit(secureArea.secureAreaUrl);
+        cy.visit(secureAreaPage.secureAreaUrl);
         cy.get(loginPage.loginErrorAlert).should('be.visible').should('contain', 'You must login to view the secure area!'); 
     });
 });
